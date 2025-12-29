@@ -1,4 +1,3 @@
-
 # LLM SQL Translator
 ###### A LLM-Driven SQL Table Migration and Data Warehouse Standardization Tool
 
@@ -7,7 +6,14 @@
 [![LLM](https://img.shields.io/badge/LLM-Qwen%20%2F%20DashScope-orange)](https://dashscope.aliyuncs.com/)
 [![SQL](https://img.shields.io/badge/SQL-Validation%20sqlglot-green)](https://github.com/tobymao/sqlglot)
 
-This project is a migration and standardization tool designed for large DDL, primarily for Data Warehouses (DWH), across different database standards. It splits long SQL statements based on tables and provides the ability to generate prompts for conversion iteration. 
+This project is a migration and standardization tool designed for large DDL workloads, primarily for Data Warehouses (DWH), across different database standards. It splits long SQL statements into table-level chunks, allows users to configure parameters, templates, and special requirements in a web interface, generates a unified prompt, and applies the same LLM-driven transformation to all chunks with syntax validation and chunk-level retry support.
+
+**Built with production-grade request control in mind**, this project introduces:
+
+- a **Rate Limiter** to strictly cap LLM API requests (RPM/QPM), ensuring stability and cost control under high concurrency;
+- a **SingleFlight-style request deduplication mechanism** (based on `asyncio.Future`) to merge identical in-flight requests, preventing repeated user-triggered executions and wasted tokens;
+- persistent **checkpoint-based recovery**, allowing long-running or interrupted requests to resume even after page refreshes or delayed retries.
+
 
 ![](webapp/static/main_pic.png)
 
