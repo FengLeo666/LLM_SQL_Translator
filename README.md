@@ -32,7 +32,7 @@ This project is a migration and standardization tool designed for **large SQL ta
 To quickly deploy the project using Docker, use the following command:
 
 ```bash
-docker run -d -p 8001:8000 -e API_KEY=YOUR_API_KEY -e LLM_TYPE=YOUR_LLM_TYPE -e LLM_RPM=5 --name llm-sql-translator fengleo/llm-sql-translator:latest
+docker run -d -p 8000:8000 -e API_KEY=YOUR_API_KEY -e LLM_TYPE=YOUR_LLM_TYPE -e LLM_RPM=5 --name llm-sql-translator fengleo/llm-sql-translator:latest
 ```
 
 This command runs the project in a Docker container with the specified API key, LLM type, and rate limit (RPM). 
