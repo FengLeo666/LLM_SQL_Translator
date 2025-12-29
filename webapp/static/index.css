@@ -1,0 +1,838 @@
+:root {
+    --bg0: #0b1220;
+    --bg1: #0f1a33;
+    --text: #e5e7eb;
+    --muted: #a3a3a3;
+    --border: rgba(255, 255, 255, .10);
+    --border2: rgba(255, 255, 255, .16);
+    --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+    --good: #22c55e;
+    --bad: #ef4444;
+    --warn: #f59e0b;
+    --info: #60a5fa;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--sans);
+    color: var(--text);
+    background: radial-gradient(1200px 600px at 10% 0%, rgba(96, 165, 250, .18), transparent 60%),
+    radial-gradient(1000px 500px at 90% 10%, rgba(34, 197, 94, .12), transparent 60%),
+    radial-gradient(900px 500px at 50% 100%, rgba(245, 158, 11, .10), transparent 60%),
+    linear-gradient(180deg, var(--bg0), var(--bg1));
+    min-height: 100vh;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(180deg, rgba(11, 18, 32, .92), rgba(11, 18, 32, .70));
+    border-bottom: 1px solid var(--border);
+}
+
+.wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 14px 16px;
+}
+
+.titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+h1 {
+    font-size: 18px;
+    margin: 0;
+    font-weight: 780;
+    letter-spacing: .2px;
+}
+
+.sub {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 6px;
+    line-height: 1.45;
+}
+
+.pillrow {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.pill {
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid var(--border);
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.pill b {
+    font-weight: 780;
+}
+
+main {
+    padding: 14px 0 60px;
+}
+
+.grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .03));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.card .hd {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.card .hd h2 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 780;
+    letter-spacing: .2px;
+}
+
+.card .bd {
+    padding: 12px 14px;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.field {
+    flex: 1;
+    min-width: 200px;
+}
+
+/* 参数区：2*2 分布 */
+/* 参数区：2*3 分布 */
+.paramGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+@media (max-width: 1050px) {
+    .paramGrid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 680px) {
+    .paramGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.paramGrid .field {
+    min-width: 0;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin: 0 0 6px;
+}
+
+input[type="text"], input[type="number"], textarea {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--border2);
+    padding: 10px 10px;
+    background: rgba(0, 0, 0, .18);
+    color: var(--text);
+    outline: none;
+    transition: border-color .15s ease, box-shadow .15s ease, opacity .15s ease;
+    font-size: 13px;
+}
+
+input:focus, textarea:focus {
+    border-color: rgba(96, 165, 250, .65);
+    box-shadow: 0 0 0 6px rgba(96, 165, 250, .12);
+}
+
+textarea {
+    font-family: var(--mono);
+    line-height: 1.35;
+    resize: vertical;
+    min-height: 120px;
+    white-space: pre;
+}
+
+.btnrow {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Auto convert toggle */
+.switchWrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .06);
+    user-select: none;
+    cursor: pointer;
+}
+
+.switchWrap input {
+    display: none;
+}
+
+.switch {
+    width: 36px;
+    height: 20px;
+    border-radius: 999px;
+    border: 1px solid var(--border2);
+    background: rgba(255, 255, 255, .10);
+    position: relative;
+    transition: background .15s ease, border-color .15s ease;
+}
+
+.switch::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, .85);
+    transition: left .15s ease;
+}
+
+.switchWrap input:checked + .switch {
+    background: rgba(34, 197, 94, .20);
+    border-color: rgba(34, 197, 94, .45);
+}
+
+.switchWrap input:checked + .switch::after {
+    left: 18px;
+}
+
+.switchText {
+    font-size: 12px;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.switchWrap.disabledMask {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+
+button {
+    border-radius: 12px;
+    border: 1px solid var(--border2);
+    background: rgba(255, 255, 255, .06);
+    color: var(--text);
+    padding: 10px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: transform .03s ease, background .15s ease, border-color .15s ease, opacity .15s ease;
+    user-select: none;
+}
+
+button:hover {
+    background: rgba(255, 255, 255, .10);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+button.primary {
+    background: rgba(96, 165, 250, .22);
+    border-color: rgba(96, 165, 250, .50);
+}
+
+button.primary:hover {
+    background: rgba(96, 165, 250, .28);
+}
+
+button.good {
+    background: rgba(34, 197, 94, .16);
+    border-color: rgba(34, 197, 94, .45);
+}
+
+button.good:hover {
+    background: rgba(34, 197, 94, .22);
+}
+
+button.danger {
+    background: rgba(239, 68, 68, .16);
+    border-color: rgba(239, 68, 68, .45);
+}
+
+button.danger:hover {
+    background: rgba(239, 68, 68, .22);
+}
+
+button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.hint {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.45;
+}
+
+.drop {
+    border: 1px dashed rgba(255, 255, 255, .24);
+    border-radius: 16px;
+    padding: 14px;
+    background: rgba(0, 0, 0, .16);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.drop.dragover {
+    border-color: rgba(96, 165, 250, .70);
+    box-shadow: 0 0 0 6px rgba(96, 165, 250, .10) inset;
+}
+
+.drop.uploaded {
+    border-style: solid;
+    border-color: rgba(34, 197, 94, .55);
+    background: rgba(34, 197, 94, .06);
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, .08) inset;
+}
+
+.drop .left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.drop .left .big {
+    font-weight: 780;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.drop .left .small {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.drop .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(34, 197, 94, .45);
+    background: rgba(34, 197, 94, .12);
+    color: rgba(255, 255, 255, .95);
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.drop .tag .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(34, 197, 94, .95);
+}
+
+.mono {
+    font-family: var(--mono);
+    font-size: 12px;
+}
+
+.sep {
+    height: 10px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Chunk list */
+.chunksTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    background: rgba(0, 0, 0, .10);
+}
+
+.progress {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, .06);
+    font-size: 12px;
+    color: var(--text);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .28);
+}
+
+.badge.wait .dot {
+    background: rgba(245, 158, 11, .9);
+}
+
+.badge.run .dot {
+    background: rgba(96, 165, 250, .95);
+}
+
+.badge.ok .dot {
+    background: rgba(34, 197, 94, .95);
+}
+
+.badge.err .dot {
+    background: rgba(239, 68, 68, .95);
+}
+
+.spinner {
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(255, 255, 255, .22);
+    border-top-color: rgba(96, 165, 250, .95);
+    border-radius: 999px;
+    animation: spin .7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.chunkCard {
+    margin: 12px 14px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: rgba(0, 0, 0, .14);
+    overflow: hidden;
+}
+
+.chunkHd {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.chunkTitle {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 220px;
+}
+
+.chunkTitle .t {
+    font-weight: 780;
+    font-size: 13px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.chunkTitle .m {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.chunkActions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.chunkBody {
+    padding: 10px 12px;
+}
+
+/* ===== Chunk 折叠/展开：默认定高，focus 时展开 ===== */
+
+/* 默认：两列等高不再依赖内容高度 */
+.twoCol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: stretch;
+}
+
+/* panel 仍建议用 flex（头部固定 + 内容区撑满） */
+.panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+/* 默认折叠高度（你可以改成 140/160） */
+:root {
+    --chunk-ta-collapsed: 140px;
+    --chunk-ta-expanded: 620px; /* 更高：你也可以 560/700 自己调 */
+}
+
+/* 默认：所有 chunk 的 textarea 固定较短高度 */
+.chunkCard .panel textarea {
+    height: var(--chunk-ta-collapsed);
+    min-height: var(--chunk-ta-collapsed);
+    max-height: var(--chunk-ta-collapsed);
+    overflow: auto;
+    resize: none; /* 默认不允许拖拽破坏布局 */
+}
+
+/* 展开：仅对该 chunk 生效 */
+.chunkCard.expanded .panel textarea {
+    height: var(--chunk-ta-expanded);
+    min-height: var(--chunk-ta-expanded);
+    max-height: var(--chunk-ta-expanded);
+}
+
+/* 允许“转换后”在展开时可拖拽（可选） */
+.chunkCard.expanded .panel-dst textarea {
+    resize: vertical;
+}
+
+/* promptOverride（提示词框）也一起做折叠/展开（可选） */
+.chunkCard .chunkBody textarea[id^="prompt-"] {
+    height: var(--chunk-ta-collapsed);
+    min-height: var(--chunk-ta-collapsed);
+    max-height: var(--chunk-ta-collapsed);
+    overflow: auto;
+}
+
+.chunkCard.expanded .chunkBody textarea[id^="prompt-"] {
+    height: var(--chunk-ta-expanded);
+    min-height: var(--chunk-ta-expanded);
+    max-height: var(--chunk-ta-expanded);
+}
+
+/* 小屏：一列时也保持定高逻辑 */
+@media (max-width: 980px) {
+    .twoCol {
+        grid-template-columns: 1fr;
+    }
+}
+
+.twoCol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: stretch;
+}
+
+
+.panel {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: rgba(0, 0, 0, .12);
+    overflow: hidden;
+
+    /* ✅ 关键：让 panel 内部形成“头部固定 + 内容区拉伸” */
+    display: flex;
+    flex-direction: column;
+    min-height: 0; /* ✅ 防止内容撑爆导致无法拉伸 */
+}
+
+.panel .ph {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 12px;
+
+    flex: 0 0 auto; /* 头部固定高度 */
+}
+
+.panel .pb {
+    padding: 8px 10px;
+
+    /* ✅ 关键：pb 吃掉剩余高度 */
+    flex: 1 1 auto;
+    min-height: 0; /* ✅ 允许内部 textarea 正确计算高度/滚动 */
+}
+
+.panel textarea {
+    width: 100%;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+
+    /* ✅ 默认占满 pb */
+    height: 100%;
+    min-height: 160px;
+
+    /* 让超长内容滚动（尤其是转换前） */
+    overflow: auto;
+}
+
+.panel textarea:focus {
+    box-shadow: none;
+}
+
+/* 转换前：禁止拖拽，避免破坏等高 */
+.panel-src textarea {
+    resize: none;
+}
+
+/* 转换后：仍可编辑时允许纵向拖拽（你也可以保留/删除） */
+.panel-dst textarea {
+    resize: vertical;
+}
+
+
+.panel textarea:focus {
+    box-shadow: none;
+}
+
+.chunkStateWait {
+    box-shadow: none;
+}
+
+.chunkStateRun {
+    border-color: rgba(96, 165, 250, .42);
+    box-shadow: 0 0 0 1px rgba(96, 165, 250, .18), 0 12px 24px rgba(0, 0, 0, .18);
+}
+
+.chunkStateOk {
+    border-color: rgba(34, 197, 94, .42);
+    box-shadow: 0 0 0 1px rgba(34, 197, 94, .16), 0 12px 24px rgba(0, 0, 0, .18);
+}
+
+.chunkStateErr {
+    border-color: rgba(239, 68, 68, .45);
+    box-shadow: 0 0 0 1px rgba(239, 68, 68, .18), 0 12px 24px rgba(0, 0, 0, .18);
+}
+
+.errBox {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid rgba(239, 68, 68, .40);
+    background: rgba(239, 68, 68, .10);
+    color: rgba(255, 255, 255, .92);
+    font-size: 12px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: var(--mono);
+    display: none;
+}
+
+.errBox.show {
+    display: block;
+}
+
+.inlineNote {
+    font-size: 12px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* disabled states */
+.disabledMask {
+    opacity: .60;
+    pointer-events: none;
+    filter: saturate(.9);
+}
+
+/* Prompt feedback */
+.promptBanner {
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid var(--border2);
+    background: rgba(255, 255, 255, .06);
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.promptBanner.show {
+    display: flex;
+}
+
+.promptBanner .left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.promptBanner .title {
+    font-weight: 780;
+    font-size: 13px;
+}
+
+.promptBanner.run {
+    border-color: rgba(96, 165, 250, .55);
+    background: rgba(96, 165, 250, .12);
+    animation: pulse 1.4s ease-in-out infinite;
+}
+
+.promptBanner.ok {
+    border-color: rgba(34, 197, 94, .55);
+    background: rgba(34, 197, 94, .10);
+}
+
+.promptBanner.err {
+    border-color: rgba(239, 68, 68, .55);
+    background: rgba(239, 68, 68, .10);
+}
+
+.promptBanner.ok .dot {
+    background: rgba(34, 197, 94, .95);
+}
+
+.promptBanner.err .dot {
+    background: rgba(239, 68, 68, .95);
+}
+
+.promptBanner.run .dot {
+    background: rgba(96, 165, 250, .95);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(96, 165, 250, .00);
+    }
+    50% {
+        box-shadow: 0 0 0 6px rgba(96, 165, 250, .10);
+    }
+}
+
+/* Chunk lock overlay (before general_prompt ready) */
+/*        .lockWrap {*/
+/*            position: relative;*/
+/*        }*/
+
+/*        !* Chunk lock overlay（轻度模糊冻结态） *!*/
+/*.lockLayer {*/
+/*    position: absolute;*/
+/*    inset: 0;*/
+/*    z-index: 6;*/
+
+/*    display: none;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    padding: 16px;*/
+
+/*    !* 关键：轻度模糊 + 微暗 *!*/
+/*    background: rgba(11, 18, 32, 0.15);*/
+/*    backdrop-filter: blur(1px);*/
+/*    -webkit-backdrop-filter: blur(1px);*/
+
+/*    pointer-events: all; !* 拦截交互 *!*/
+/*}*/
+
+/*.lockLayer.show {*/
+/*    display: flex;*/
+/*}*/
+
+/*        .lockLayer .box {*/
+/*            width: min(560px, 100%);*/
+/*            border: 1px solid var(--border2);*/
+/*            background: rgba(0, 0, 0, .35);*/
+/*            border-radius: 16px;*/
+/*            padding: 14px 14px;*/
+/*            box-shadow: 0 10px 24px rgba(0, 0, 0, .25);*/
+/*            text-align: center;*/
+/*        }*/
+
+/*        .lockLayer .box .t {*/
+/*            font-weight: 780;*/
+/*            font-size: 13px;*/
+/*            margin-bottom: 6px;*/
+/*        }*/
+
+/*        .lockLayer .box .m {*/
+/*            color: var(--muted);*/
+/*            font-size: 12px;*/
+/*            line-height: 1.45;*/
+/*        }*/
+
+/* 转换前：高度完全跟随 panel，不做自适应 */
+.panel-src textarea {
+    height: 100%;
+    resize: none; /* 防止用户拖拽破坏等高 */
+    overflow: auto; /* 内容多就滚动 */
+}
+
+/* 转换后：仍然允许内容驱动高度 */
+.panel-dst textarea {
+    resize: vertical;
+}
