@@ -1,5 +1,5 @@
-# Exclude frontend static files from language statistics
-webapp/static/* linguist-vendored
+## Exclude frontend static files from language statistics
+#webapp/static/* linguist-vendored
 
 # Or only mark html
 *.html linguist-vendored
