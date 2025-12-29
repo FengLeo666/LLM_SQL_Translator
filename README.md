@@ -7,7 +7,7 @@
 [![LLM](https://img.shields.io/badge/LLM-Qwen%20%2F%20DashScope-orange)](https://dashscope.aliyuncs.com/)
 [![SQL](https://img.shields.io/badge/SQL-Validation%20sqlglot-green)](https://github.com/tobymao/sqlglot)
 
-This project is a migration and standardization tool designed for **large SQL table creation statements**, primarily for Data Warehouses (DWH), across different database standards. It splits long SQL statements based on tables and provides the ability to generate prompts for conversion. The tool uses **LangGraph** orchestration, **LLMs (default: Qwen / DashScope)** for transformation, and **sqlglot** for syntax validation and auto-retry.
+This project is a migration and standardization tool designed for large DDL, primarily for Data Warehouses (DWH), across different database standards. It splits long SQL statements based on tables and provides the ability to generate prompts for conversion iteration. 
 
 ![](webapp/static/main_pic.png)
 
