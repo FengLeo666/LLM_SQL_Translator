@@ -1,0 +1,17 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.log
+.env
+.venv
+venv/
+env/
+
+# Local persisted checkpoints / runtime artifacts
+resources/
+
+# OS junk
+.DS_Store
+Thumbs.db
