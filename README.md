@@ -1,5 +1,6 @@
 
-# SQL Transfer Agent (LLM-Driven SQL Table Migration and Data Warehouse Standardization Tool)
+# LLM SQL Translator
+###### A LLM-Driven SQL Table Migration and Data Warehouse Standardization Tool
 
 [![Python](https://img.shields.io/badge/Python-3.12%2B-blue)](https://www.python.org/)
 [![LangGraph](https://img.shields.io/badge/Orchestration-LangGraph-black)](https://github.com/langchain-ai/langgraph)
