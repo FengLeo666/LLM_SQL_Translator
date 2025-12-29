@@ -1,0 +1,29 @@
+# Ignore all __pycache__ directories, including subdirectories
+__pycache__/
+*/__pycache__/
+
+# Ignore Python bytecode files
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore virtual environments
+.venv/
+venv/
+env/
+
+# Ignore IDE related files (e.g., for JetBrains IDEs like PyCharm)
+.idea/
+
+# Ignore environment variable files
+.env
+
+# Ignore log files
+*.log
+
+# Ignore local persisted checkpoints / runtime artifacts
+resources/
+
+# OS generated files
+.DS_Store
+Thumbs.db

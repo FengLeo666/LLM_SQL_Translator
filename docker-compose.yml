@@ -1,0 +1,17 @@
+services:
+  llm-sql-translator:
+    build: .
+    image: llm-sql-translator:latest
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      # You can override these in .env
+      API_BASE: ${API_BASE:-https://dashscope.aliyuncs.com/compatible-mode/v1}
+      LLM_TYPE: ${LLM_TYPE:-qwen3-max}
+      LLM_RPM: ${LLM_RPM:-88}
+    volumes:
+      # Persist LangGraph checkpoints
+      - ./resources:/app/resources
+    restart: unless-stopped
